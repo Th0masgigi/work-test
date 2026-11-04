@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design System — Thomas Gibson-Gamache</title>
+  <meta name="description" content="Fonts and colours used on Thomas Gibson-Gamache's portfolio site.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Same tokens as index.html, so this page documents itself */
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f2f2f2;
+      --muted: #8a8a8a;
+      --line: rgba(255, 255, 255, 0.08);
+      --rule: rgba(255, 255, 255, 0.14);
+      --outline: rgba(255, 255, 255, 0.25);
+      --accent: #7ef29a;
+      --max: 1120px;
+      --gutter: clamp(16px, 5vw, 64px);
+      --sans: "Manrope", system-ui, -apple-system, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--fg);
+      font-family: var(--sans); line-height: 1.5;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+    .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter);
+      display: grid; grid-template-columns: repeat(8, 1fr);
+    }
+    .grid-bg span { border-left: 1px solid var(--line); }
+    .grid-bg span:last-child { border-right: 1px solid var(--line); }
+    @media (max-width: 700px) {
+      .grid-bg { grid-template-columns: repeat(4, 1fr); }
+      .grid-bg span:nth-child(n+5) { display: none; }
+      .grid-bg span:nth-child(4) { border-right: 1px solid var(--line); }
+    }
+    main, header, footer { position: relative; z-index: 1; }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(10, 10, 10, 0.75);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid var(--rule); }
+    .logo { display: inline-flex; color: var(--fg); }
+    .logo svg { display: block; width: 40px; height: auto; }
+    .nav ul { display: flex; gap: clamp(16px, 4vw, 44px); list-style: none; }
+    .nav ul a { color: var(--muted); font-size: 15px; transition: color .2s; }
+    .nav ul a:hover { color: var(--fg); }
+    .nav ul a.cta { color: var(--accent); }
+
+    /* Intro */
+    .intro { padding: 96px 0 72px; display: grid; gap: 24px; }
+    .intro .mono { color: var(--muted); }
+    .intro h1 { font-size: clamp(40px, 7.6vw, 96px); font-weight: 500; letter-spacing: -0.045em; line-height: 1.02; text-wrap: balance; }
+    .intro p { max-width: 58ch; color: var(--muted); font-size: 17px; }
+
+    section { padding: 72px 0; border-top: 1px solid var(--rule); }
+    .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .sec-head h2 { font-size: clamp(28px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.1; }
+    .sec-head h2 b { color: var(--accent); font-weight: 500; }
+    .sec-head .mono { color: var(--muted); }
+    h3.group { font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 48px 0 16px; }
+    h3.group:first-of-type { margin-top: 0; }
+
+    /* Colour swatches */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .swatch { border: 1px solid var(--rule); background: var(--bg); display: flex; flex-direction: column; min-width: 0; }
+    .chip {
+      height: 128px; position: relative; display: flex; align-items: flex-end; justify-content: space-between;
+      padding: 12px; font-family: var(--mono); font-size: 12px;
+    }
+    /* Checkerboard so transparent colours read as transparent */
+    .chip.alpha {
+      background-image:
+        linear-gradient(var(--c), var(--c)),
+        conic-gradient(#1a1a1a 25%, #0a0a0a 0 50%, #1a1a1a 0 75%, #0a0a0a 0);
+      background-size: auto, 16px 16px;
+    }
+    .chip:not(.alpha) { background: var(--c); }
+    .chip .aa { padding: 2px 6px; border-radius: 999px; background: rgba(0,0,0,.55); color: #f2f2f2; }
+    .meta { padding: 14px; display: grid; gap: 6px; border-top: 1px solid var(--rule); }
+    .meta .name { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; }
+    .meta .token { color: var(--accent); }
+    .meta .use { color: var(--muted); font-size: 14px; }
+    .copy {
+      justify-self: start; display: inline-flex; gap: 8px; align-items: center;
+      background: none; border: 1px solid var(--outline); color: var(--fg); border-radius: 999px;
+      padding: 6px 12px; font: inherit; font-family: var(--mono); font-size: 12px; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .copy:hover { background: var(--fg); color: var(--bg); }
+
+    /* Card palette demo */
+    .palette-demo {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; align-items: stretch;
+    }
+    .palette-demo + .palette-demo { margin-top: 32px; }
+    .mini-card {
+      background: var(--paper); color: var(--ink); padding: 18px; display: flex; flex-direction: column; gap: 12px; min-height: 260px;
+    }
+    .mini-card .m { display: flex; justify-content: space-between; border-bottom: 1px solid currentColor; padding-bottom: 8px; opacity: .85; }
+    .mini-card h4 { font-size: 44px; font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+    .mini-card .shade { flex: 1; background: var(--shade); min-height: 90px; }
+    .mini-card .shade.striped {
+      background:
+        repeating-linear-gradient(135deg, transparent 0 18px, color-mix(in srgb, var(--ink) 10%, transparent) 18px 19px),
+        var(--shade);
+    }
+    .pal-td { --paper: #12341c; --ink: #c9f5d3; --shade: #0b2412; }
+    .pal-p2 { --paper: #1c2433; --ink: #c7d6f5; --shade: #121926; }
+    .pal-p3 { --paper: #dcd8f2; --ink: #2a1f6b; --shade: #c9c3eb; }
+    @media (max-width: 760px) { .palette-demo { grid-template-columns: 1fr; } }
+
+    /* Typography */
+    .families { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 760px) { .families { grid-template-columns: 1fr; } }
+    .family { border: 1px solid var(--rule); padding: 24px; display: grid; gap: 18px; min-width: 0; }
+    .family .big { font-size: clamp(64px, 9vw, 112px); line-height: 1; letter-spacing: -0.045em; font-weight: 500; }
+    .family.m .big { font-family: var(--mono); letter-spacing: -0.02em; font-weight: 400; }
+    .family h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
+    .family .role { color: var(--muted); }
+    .weights { display: flex; flex-wrap: wrap; gap: 8px; }
+    .weight { border: 1px solid var(--outline); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+    .weight.unused { border-style: dashed; color: var(--muted); }
+    .family .stack { color: var(--muted); word-break: break-word; }
+    .glyphs { font-size: 18px; letter-spacing: 0.02em; color: var(--fg); word-break: break-all; }
+    .family.m .glyphs { font-family: var(--mono); font-size: 15px; }
+
+    .scale { margin-top: 48px; border-top: 1px solid var(--rule); }
+    .row {
+      display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 24px;
+      padding: 28px 0; border-bottom: 1px solid var(--rule); align-items: baseline;
+    }
+    .row .spec { display: grid; gap: 4px; color: var(--muted); }
+    .row .spec b { color: var(--fg); font-family: var(--sans); font-weight: 500; font-size: 15px; letter-spacing: 0; }
+    .row .sample { min-width: 0; overflow-wrap: anywhere; }
+    .s-hero { font-size: clamp(40px, 7.6vw, 96px); font-weight: 500; letter-spacing: -0.045em; line-height: 1.02; }
+    .s-card { font-size: clamp(40px, 7vw, 76px); font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+    .s-contact { font-size: clamp(36px, 6vw, 80px); font-weight: 500; letter-spacing: -0.045em; line-height: 1.05; }
+    .s-about { font-size: clamp(26px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.18; max-width: 24ch; }
+    .s-body { font-size: 16px; max-width: 52ch; }
+    .s-ui { font-size: 15px; }
+    .s-mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; }
+    @media (max-width: 640px) {
+      .row { grid-template-columns: 1fr; gap: 12px; }
+      section { padding: 56px 0; }
+    }
+
+    .note {
+      margin-top: 40px; padding: 16px 18px; border: 1px dashed var(--outline);
+      color: var(--muted); font-size: 15px; max-width: 70ch;
+    }
+    .note b { color: var(--fg); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; color: var(--muted); }
+    .foot a:hover { color: var(--fg); }
+
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0;
+      background: var(--fg); color: var(--bg); padding: 8px 14px; border-radius: 999px;
+      font-family: var(--mono); font-size: 12px; transition: opacity .2s, transform .2s; z-index: 20; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="grid-bg" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <header>
+    <nav class="wrap nav">
+      <a href="index.html" class="logo" aria-label="Back to portfolio home">
+        <svg width="50" height="33" viewBox="0 0 50 33" fill="none" aria-hidden="true"><path d="M12 18.4414L12 25.2354L8 25.2354L8 18.4414L6.36374e-07 18.4414L8.06097e-07 14.5586L8 14.5586L8 7.76465L12 7.76465L12 14.5586L20 14.5586L20 18.4414L12 18.4414ZM27 11.6475L27 21.3525L35 21.3525L35 25.2354L27 25.2354L27 33L23 33L23 25.2354L15 25.2354L15 21.3525L23 21.3525L23 11.6475L15 11.6475L15 7.76465L23 7.76465L23 1.00537e-06L27 1.18021e-06L27 7.76465L35 7.76465L35 11.6475L27 11.6475ZM42 18.4414L42 25.2354L38 25.2354L38 18.4414L30 18.4414L30 14.5586L38 14.5586L38 7.76465L42 7.76465L42 14.5586L50 14.5586L50 18.4414L42 18.4414Z" fill="currentColor"/></svg>
+      </a>
+      <ul>
+        <li><a href="#colours">colours</a></li>
+        <li><a href="#type">type</a></li>
+        <li><a href="index.html" class="cta">← portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="intro">
+      <span class="mono">design system · source: index.html</span>
+      <h1>fonts &amp; colours</h1>
+      <p>Every typeface, weight, and colour the portfolio uses, with the CSS token each one lives in. Contrast ratios are measured against the page background.</p>
+    </div>
+
+    <section id="colours">
+      <div class="sec-head">
+        <h2><b>.</b>colours</h2>
+        <span class="mono">17 values · dark theme only</span>
+      </div>
+
+      <h3 class="group">Core palette</h3>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip" style="--c:#0a0a0a; color:#f2f2f2; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14)"><span>Aa</span></div>
+          <div class="meta">
+            <span class="name">Ink black</span>
+            <span class="token mono">--bg</span>
+            <span class="use">Page background, header base</span>
+            <button class="copy" data-hex="#0a0a0a" type="button">#0A0A0A</button>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="--c:#f2f2f2; color:#0a0a0a"><span>Aa</span><span class="aa" data-fg="#f2f2f2" data-bg="#0a0a0a"></span></div>
+          <div class="meta">
+            <span class="name">Paper white</span>
+            <span class="token mono">--fg</span>
+            <span class="use">Headlines, body text, logo, button hover fill</span>
+            <button class="copy" data-hex="#f2f2f2" type="button">#F2F2F2</button>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="--c:#8a8a8a; color:#0a0a0a"><span>Aa</span><span class="aa" data-fg="#8a8a8a" data-bg="#0a0a0a"></span></div>
+          <div class="meta">
+            <span class="name">Graphite</span>
+            <span class="token mono">--muted</span>
+            <span class="use">Nav links, labels, dates, secondary copy</span>
+            <button class="copy" data-hex="#8a8a8a" type="button">#8A8A8A</button>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="--c:#7ef29a; color:#0a0a0a"><span>Aa</span><span class="aa" data-fg="#7ef29a" data-bg="#0a0a0a"></span></div>
+          <div class="meta">
+            <span class="name">Signal green</span>
+            <span class="token mono">--accent</span>
+            <span class="use">Contact link, section dots, “let’s chat” link</span>
+            <button class="copy" data-hex="#7ef29a" type="button">#7EF29A</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="group">Lines &amp; overlays</h3>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip alpha" style="--c:rgba(255,255,255,0.08)"><span>8%</span></div>
+          <div class="meta">
+            <span class="name">Grid line</span>
+            <span class="token mono">--line</span>
+            <span class="use">Background column grid</span>
+            <button class="copy" data-hex="rgba(255, 255, 255, 0.08)" type="button">white · 8%</button>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip alpha" style="--c:rgba(255,255,255,0.14)"><span>14%</span></div>
+          <div class="meta">
+            <span class="name">Rule</span>
+            <span class="token mono">no token yet</span>
+            <span class="use">Header and footer dividers</span>
+            <button class="copy" data-hex="rgba(255, 255, 255, 0.14)" type="button">white · 14%</button>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip alpha" style="--c:rgba(255,255,255,0.25)"><span>25%</span></div>
+          <div class="meta">
+            <span class="name">Outline</span>
+            <span class="token mono">no token yet</span>
+            <span class="use">Pill button borders</span>
+            <button class="copy" data-hex="rgba(255, 255, 255, 0.25)" type="button">white · 25%</button>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip alpha" style="--c:rgba(10,10,10,0.75)"><span>75%</span></div>
+          <div class="meta">
+            <span class="name">Header glass</span>
+            <span class="token mono">no token yet</span>
+            <span class="use">Sticky header, with a 12px blur</span>
+            <button class="copy" data-hex="rgba(10, 10, 10, 0.75)" type="button">ink · 75%</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="group">Project cards</h3>
+      <div class="palette-demo">
+        <div class="swatches" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+          <div class="swatch">
+            <div class="chip" style="--c:#12341c; color:#c9f5d3"><span>Aa</span></div>
+            <div class="meta">
+              <span class="name">Forest</span>
+              <span class="token mono">--paper</span>
+              <span class="use">Card surface</span>
+              <button class="copy" data-hex="#12341c" type="button">#12341C</button>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="--c:#c9f5d3; color:#12341c"><span>Aa</span><span class="aa" data-fg="#c9f5d3" data-bg="#12341c"></span></div>
+            <div class="meta">
+              <span class="name">Mint</span>
+              <span class="token mono">--ink</span>
+              <span class="use">Card text and rule</span>
+              <button class="copy" data-hex="#c9f5d3" type="button">#C9F5D3</button>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="--c:#0b2412; color:#c9f5d3"><span>Aa</span></div>
+            <div class="meta">
+              <span class="name">Deep forest</span>
+              <span class="token mono">--shade</span>
+              <span class="use">Image well behind the photo</span>
+              <button class="copy" data-hex="#0b2412" type="button">#0B2412</button>
+            </div>
+          </div>
+        </div>
+        <div class="mini-card pal-td" aria-label="Preview of the TD Emails card colours">
+          <div class="m mono"><span>2023</span><span>Design System</span></div>
+          <h4>TD Emails</h4>
+          <div class="shade"></div>
+        </div>
+      </div>
+
+      <div class="palette-demo">
+        <div class="swatches" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+          <div class="swatch">
+            <div class="chip" style="--c:#1c2433; color:#c7d6f5"><span>Aa</span></div>
+            <div class="meta">
+              <span class="name">Slate</span>
+              <span class="token mono">--paper</span>
+              <span class="use">Card surface</span>
+              <button class="copy" data-hex="#1c2433" type="button">#1C2433</button>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="--c:#c7d6f5; color:#1c2433"><span>Aa</span><span class="aa" data-fg="#c7d6f5" data-bg="#1c2433"></span></div>
+            <div class="meta">
+              <span class="name">Mist blue</span>
+              <span class="token mono">--ink</span>
+              <span class="use">Card text and rule</span>
+              <button class="copy" data-hex="#c7d6f5" type="button">#C7D6F5</button>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="--c:#121926; color:#c7d6f5"><span>Aa</span></div>
+            <div class="meta">
+              <span class="name">Deep slate</span>
+              <span class="token mono">--shade</span>
+              <span class="use">Image well</span>
+              <button class="copy" data-hex="#121926" type="button">#121926</button>
+            </div>
+          </div>
+        </div>
+        <div class="mini-card pal-p2" aria-label="Preview of the Project two card colours">
+          <div class="m mono"><span>Year</span><span>Category</span></div>
+          <h4>Project two</h4>
+          <div class="shade striped"></div>
+        </div>
+      </div>
+
+      <div class="palette-demo">
+        <div class="swatches" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+          <div class="swatch">
+            <div class="chip" style="--c:#dcd8f2; color:#2a1f6b"><span>Aa</span></div>
+            <div class="meta">
+              <span class="name">Lavender</span>
+              <span class="token mono">--paper</span>
+              <span class="use">Card surface</span>
+              <button class="copy" data-hex="#dcd8f2" type="button">#DCD8F2</button>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="--c:#2a1f6b; color:#dcd8f2"><span>Aa</span><span class="aa" data-fg="#2a1f6b" data-bg="#dcd8f2"></span></div>
+            <div class="meta">
+              <span class="name">Indigo</span>
+              <span class="token mono">--ink</span>
+              <span class="use">Card text and rule</span>
+              <button class="copy" data-hex="#2a1f6b" type="button">#2A1F6B</button>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="--c:#c9c3eb; color:#2a1f6b"><span>Aa</span></div>
+            <div class="meta">
+              <span class="name">Deep lavender</span>
+              <span class="token mono">--shade</span>
+              <span class="use">Image well</span>
+              <button class="copy" data-hex="#c9c3eb" type="button">#C9C3EB</button>
+            </div>
+          </div>
+        </div>
+        <div class="mini-card pal-p3" aria-label="Preview of the Project three card colours">
+          <div class="m mono"><span>Year</span><span>Category</span></div>
+          <h4>Project three</h4>
+          <div class="shade striped"></div>
+        </div>
+      </div>
+      <p class="note">Each project card gets its own trio of <b>--paper</b>, <b>--ink</b> and <b>--shade</b>, set on its own class: <span class="mono">.c-td</span>, <span class="mono">.c-p2</span> and <span class="mono">.c-p3</span>. Placeholder cards show a striped image well until a photo is added. To add a project, define a new class with those three tokens.</p>
+    </section>
+
+    <section id="type">
+      <div class="sec-head">
+        <h2><b>.</b>typography</h2>
+        <span class="mono">2 families · Google Fonts</span>
+      </div>
+
+      <div class="families">
+        <div class="family">
+          <div class="big" aria-hidden="true">Aa</div>
+          <h3>Manrope</h3>
+          <span class="role">Primary face. Headlines, body copy, navigation and buttons.</span>
+          <div class="weights">
+            <span class="weight" style="font-weight:400">400 Regular · body</span>
+            <span class="weight" style="font-weight:500">500 Medium · headings</span>
+            <span class="weight unused" style="font-weight:600">600 · loaded, unused</span>
+          </div>
+          <span class="glyphs">ABCDEFGHIJKLM abcdefghijklm 0123456789 &amp;→↗</span>
+          <span class="stack mono">--sans: "Manrope", system-ui, -apple-system, sans-serif</span>
+        </div>
+        <div class="family m">
+          <div class="big" aria-hidden="true">Aa</div>
+          <h3>JetBrains Mono</h3>
+          <span class="role">Utility face. Small labels, dates, metadata and the footer.</span>
+          <div class="weights">
+            <span class="weight mono">400 Regular · labels</span>
+            <span class="weight unused mono" style="font-weight:500">500 · loaded, unused</span>
+          </div>
+          <span class="glyphs">ABCDEFGHIJKLM abcdefghijklm 0123456789 · ↓</span>
+          <span class="stack mono">--mono: "JetBrains Mono", ui-monospace, Menlo, monospace</span>
+        </div>
+      </div>
+
+      <h3 class="group" style="margin-top:56px">Type scale</h3>
+      <div class="scale" style="margin-top:0">
+        <div class="row">
+          <div class="spec mono"><b>Hero</b><span>40 → 96px · 500</span><span>−0.045em · 1.02</span><span>.hero h1</span></div>
+          <div class="sample s-hero">a digital designer</div>
+        </div>
+        <div class="row">
+          <div class="spec mono"><b>Contact</b><span>36 → 80px · 500</span><span>−0.045em · 1.05</span><span>.contact h2</span></div>
+          <div class="sample s-contact">let’s chat!</div>
+        </div>
+        <div class="row">
+          <div class="spec mono"><b>Project title</b><span>40 → 76px · 500</span><span>−0.045em · 1.0</span><span>.card h3</span></div>
+          <div class="sample s-card">TD Emails</div>
+        </div>
+        <div class="row">
+          <div class="spec mono"><b>Statement</b><span>26 → 44px · 500</span><span>−0.035em · 1.18</span><span>.about p</span></div>
+          <div class="sample s-about">I bring a systems-driven, craft-focused approach to digital design.</div>
+        </div>
+        <div class="row">
+          <div class="spec mono"><b>Body</b><span>16px · 400</span><span>0 · 1.5</span><span>.card .summary</span></div>
+          <div class="sample s-body">A multi-brand email design system for TD Bank's servicing, transactional, and notification emails.</div>
+        </div>
+        <div class="row">
+          <div class="spec mono"><b>UI</b><span>15px · 400</span><span>0 · 1.5</span><span>nav, .btn, .label</span></div>
+          <div class="sample s-ui">work &nbsp; about &nbsp; <span style="color:var(--accent)">contact</span></div>
+        </div>
+        <div class="row">
+          <div class="spec mono"><b>Label</b><span>12px · 400 · mono</span><span>+0.02em · 1.5</span><span>.mono</span></div>
+          <div class="sample s-mono">2023 · Design System · selected works ↓</div>
+        </div>
+      </div>
+
+      <p class="note">Headings sit at <b>500</b> with tight negative tracking, and get tighter as they get bigger. The sizes marked “40 → 96px” scale with the window using <span class="mono">clamp()</span>. To trim load time, drop the unused <b>Manrope 600</b> and <b>JetBrains Mono 500</b> from the Google Fonts link.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot mono">
+      <span>© 2026 Thomas Gibson-Gamache</span>
+      <a href="index.html">back to portfolio →</a>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // WCAG contrast ratio for each badge
+    function lum(hex) {
+      const n = parseInt(hex.slice(1), 16);
+      return [n >> 16, (n >> 8) & 255, n & 255]
+        .map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); })
+        .reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0);
+    }
+    document.querySelectorAll('.aa').forEach(function (el) {
+      const a = lum(el.dataset.fg), b = lum(el.dataset.bg);
+      const r = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      const grade = r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : r >= 3 ? 'AA large' : 'fail';
+      el.textContent = r.toFixed(1) + ':1 ' + grade;
+      el.title = 'Contrast of this colour as text on ' + el.dataset.bg;
+    });
+
+    // Copy colour values
+    const toast = document.querySelector('.toast');
+    let t;
+    function show(msg) {
+      toast.textContent = msg; toast.classList.add('show');
+      clearTimeout(t); t = setTimeout(() => toast.classList.remove('show'), 1600);
+    }
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const v = btn.dataset.hex;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(v).then(() => show('Copied ' + v), () => show(v));
+        } else { show(v); }
+      });
+    });
+  </script>
+</body>
+</html>

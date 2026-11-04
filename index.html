@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alex Morgan — Product Designer</title>
-  <meta name="description" content="Portfolio of Alex Morgan, a product designer focused on software interfaces and interactive experiences.">
+  <title>Thomas Gibson-Gamache — Digital Designer</title>
+  <meta name="description" content="Portfolio of Thomas Gibson-Gamache, a digital designer focused on brand, design systems, and thoughtful experiences.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -60,23 +60,21 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px; border-bottom: 1px solid rgba(255,255,255,0.14);
     }
-    .logo { font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+    .logo { display: inline-flex; align-items: center; color: var(--fg); transition: opacity .2s; }
+    .logo svg { display: block; width: 40px; height: auto; }
+    .logo:hover { opacity: .7; }
     .nav ul { display: flex; gap: clamp(16px, 4vw, 44px); list-style: none; }
     .nav a { color: var(--muted); font-size: 15px; transition: color .2s; }
     .nav a:hover { color: var(--fg); }
     .nav a.cta { color: var(--accent); }
+    .nav a.logo { color: var(--fg); }
     @media (max-width: 640px) { .nav li:not(:last-child) { display: none; } }
 
     /* Hero */
     .topline {
       display: flex; justify-content: space-between; padding-top: 12px; color: var(--muted);
     }
-    .status { display: inline-flex; align-items: center; gap: 8px; }
-    .status::before {
-      content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 0 0 rgba(126,242,154,.6); animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(126,242,154,0); } 100% { box-shadow: 0 0 0 0 rgba(126,242,154,0); } }
+    .topline a:hover { color: var(--fg); }
 
     section.hero { min-height: calc(100vh - 64px); display: flex; flex-direction: column; padding-top: 0; padding-bottom: 0; }
     .hero-body { flex: 1; display: flex; align-items: center; padding: 80px 0; }
@@ -105,7 +103,7 @@
     .projects { padding-top: 40px; }
     .card {
       position: sticky; top: 84px;
-      border-radius: 14px; padding: 20px 24px 24px;
+      border-radius: 0; padding: 20px 24px 24px;
       margin-bottom: 48px; min-height: 560px;
       display: flex; flex-direction: column; gap: 14px;
       color: var(--ink); background: var(--paper);
@@ -117,57 +115,41 @@
     .card:nth-child(4) { top: 132px; }
     .card:nth-child(5) { top: 148px; }
     .card-meta { display: flex; justify-content: space-between; border-bottom: 1px solid currentColor; padding-bottom: 10px; opacity: .85; }
-    .card-head { display: flex; justify-content: space-between; align-items: center; }
+    .card-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
     .card h3 { font-size: clamp(40px, 7vw, 76px); font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
-    .card .arrow { width: 40px; height: 40px; transition: transform .3s; }
+    .card .summary { max-width: 52ch; font-size: 16px; opacity: .8; }
+    .card .arrow { width: 40px; height: 40px; flex-shrink: 0; transition: transform .3s; }
     .card:hover .arrow { transform: translateX(6px); }
     .visual {
-      flex: 1; min-height: 360px; border-radius: 6px; overflow: hidden; position: relative;
+      flex: 1; min-height: 360px; border-radius: 0; overflow: hidden; position: relative;
       background: var(--shade);
+    }
+    .visual img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+    .card:hover .visual img { transform: scale(1.03); }
+
+    .c-td { --paper: #12341c; --ink: #c9f5d3; --shade: #0b2412; }
+    .c-p2 { --paper: #1c2433; --ink: #c7d6f5; --shade: #121926; }
+    .c-p3 { --paper: #dcd8f2; --ink: #2a1f6b; --shade: #c9c3eb; }
+
+    /* Placeholder image well — swap for an <img> when the project is ready */
+    .visual.placeholder {
       display: grid; place-items: center;
+      background:
+        repeating-linear-gradient(135deg, transparent 0 18px, color-mix(in srgb, var(--ink) 10%, transparent) 18px 19px),
+        var(--shade);
     }
-
-    .c1 { --paper: #ef6a2e; --ink: #140700; --shade: #c4501c; }
-    .c2 { --paper: #e8e6f6; --ink: #2b22d8; --shade: #2b22d8; }
-    .c3 { --paper: #1b201d; --ink: #a6d8b2; --shade: #0f1311; }
-    .c4 { --paper: #ffd83d; --ink: #1d1700; --shade: #f2b705; }
-    .c5 { --paper: #f4f1ea; --ink: #121212; --shade: #d9d3c4; }
-
-    /* CSS-drawn visuals */
-    .phone {
-      width: 150px; height: 300px; border-radius: 28px; background: #111;
-      border: 6px solid #1c1c1c; transform: rotate(-14deg);
-      box-shadow: 30px 40px 60px rgba(0,0,0,.45);
-      display: grid; place-items: center; color: var(--paper);
-      font-weight: 600; letter-spacing: -0.03em; font-size: 22px;
-    }
-    .c2 .phone { background: #d9d6ff; color: #2b22d8; transform: rotate(8deg); border-color: #0f0b5c; }
-    .laptop {
-      width: min(70%, 420px); aspect-ratio: 16/10; background: #222a25; border-radius: 10px;
-      border: 8px solid #2c342f; transform: perspective(900px) rotateX(18deg) rotateZ(-6deg);
-      box-shadow: 0 40px 60px rgba(0,0,0,.6);
-      display: grid; grid-template-columns: 1fr 2fr; gap: 8px; padding: 10px;
-    }
-    .laptop i { background: #34413a; border-radius: 4px; }
-    .laptop i:nth-child(2) { background: #a6d8b2; opacity: .35; }
-    .pouch {
-      width: 200px; height: 260px; border-radius: 10px 10px 18px 18px;
-      background: linear-gradient(135deg, #f4f4f4, #9c9c9c 45%, #e8e8e8 60%, #8a8a8a);
-      transform: rotate(-10deg); box-shadow: 30px 40px 50px rgba(80,60,0,.35);
-      display: grid; place-items: center; font-weight: 600; font-size: 26px; color: #1d1700; letter-spacing: -0.04em;
-    }
-    .poster {
-      display: grid; grid-template-columns: repeat(3, 90px); gap: 14px;
-    }
-    .poster b { aspect-ratio: 3/4; border-radius: 6px; background: #121212; }
-    .poster b:nth-child(2) { background: #ef6a2e; transform: translateY(-24px); }
-    .poster b:nth-child(3) { background: #fff; border: 1px solid #121212; }
+    .visual.placeholder span { padding: 6px 12px; border: 1px dashed var(--ink); opacity: .7; }
 
     /* About */
     .about p {
       font-size: clamp(26px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.18;
-      max-width: 22ch;
+      max-width: 24ch;
     }
+    .about p + p { margin-top: 28px; }
     .about p em { font-style: normal; color: var(--muted); }
     .btn {
       display: inline-flex; align-items: center; gap: 10px; margin-top: 40px;
@@ -176,23 +158,14 @@
     }
     .btn:hover { background: var(--fg); color: var(--bg); }
 
-    /* Notes */
-    .notes ul { list-style: none; border-top: 1px solid rgba(255,255,255,.14); }
-    .notes li a {
-      display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
-      padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,.14);
-      transition: padding .3s, color .3s;
-    }
-    .notes li a:hover { padding-left: 12px; color: var(--accent); }
-    .notes h4 { font-size: clamp(20px, 2.6vw, 30px); font-weight: 500; letter-spacing: -0.03em; }
-    .notes time { color: var(--muted); white-space: nowrap; }
-
     /* Contact */
     .contact { padding-bottom: 160px; }
     .contact h2 {
       font-size: clamp(36px, 6vw, 80px); font-weight: 500; letter-spacing: -0.045em; line-height: 1.05; max-width: 16ch;
     }
     .contact h2 a { color: var(--accent); border-bottom: 2px solid currentColor; }
+    .socials { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+    .socials .btn { margin-top: 0; }
 
     footer { border-top: 1px solid rgba(255,255,255,.14); padding: 28px 0 40px; }
     .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; color: var(--muted); }
@@ -205,11 +178,10 @@
 
     @media (max-width: 640px) {
       section { padding: 80px 0; }
-      .card { min-height: 440px; padding: 16px; }
-      .visual { min-height: 260px; }
-      .phone { width: 110px; height: 220px; }
-      .poster { grid-template-columns: repeat(3, 64px); }
-      .notes li a { flex-direction: column; gap: 6px; }
+      .card { min-height: 480px; padding: 16px; }
+      .visual { min-height: 300px; }
+      .card .summary { font-size: 15px; }
+      .topline a { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -223,12 +195,13 @@
 
   <header>
     <nav class="wrap nav">
-      <a href="#" class="logo">.morgan</a>
+      <a href="#" class="logo" aria-label="Thomas Gibson-Gamache, home">
+        <svg width="50" height="33" viewBox="0 0 50 33" fill="none" aria-hidden="true"><path d="M12 18.4414L12 25.2354L8 25.2354L8 18.4414L6.36374e-07 18.4414L8.06097e-07 14.5586L8 14.5586L8 7.76465L12 7.76465L12 14.5586L20 14.5586L20 18.4414L12 18.4414ZM27 11.6475L27 21.3525L35 21.3525L35 25.2354L27 25.2354L27 33L23 33L23 25.2354L15 25.2354L15 21.3525L23 21.3525L23 11.6475L15 11.6475L15 7.76465L23 7.76465L23 1.00537e-06L27 1.18021e-06L27 7.76465L35 7.76465L35 11.6475L27 11.6475ZM42 18.4414L42 25.2354L38 25.2354L38 18.4414L30 18.4414L30 14.5586L38 14.5586L38 7.76465L42 7.76465L42 14.5586L50 14.5586L50 18.4414L42 18.4414Z" fill="currentColor"/></svg>
+      </a>
       <ul>
         <li><a href="#work">work</a></li>
         <li><a href="#about">about</a></li>
-        <li><a href="#notes">notes</a></li>
-        <li><a href="#contact" class="cta">say hi</a></li>
+        <li><a href="#contact" class="cta">contact</a></li>
       </ul>
     </nav>
   </header>
@@ -236,103 +209,86 @@
   <main>
     <section class="hero wrap">
       <div class="topline mono">
-        <span>Hi, I'm Alex</span>
-        <span class="status">open to new work</span>
+        <span>Hi, I'm Thomas Gibson-Gamache</span>
+        <a href="https://www.linkedin.com/in/tgibsongamache/" target="_blank" rel="noopener">experience on LinkedIn ↗</a>
       </div>
       <div class="hero-body">
         <h1>
-          a product designer<br>
-          shaping
+          a digital designer<br>
+          focused on
           <span class="rotator" aria-live="polite">
-            <span class="on">calm software</span>
-            <span>playful interfaces</span>
-            <span>useful websites</span>
-            <span>honest brands</span>
+            <span class="on">brand</span>
+            <span>design systems</span>
+            <span>thoughtful experiences</span>
           </span>
         </h1>
       </div>
       <div class="scroll-hint mono">
-        <span>selected work ↓</span>
-        <span>based in Montréal</span>
+        <span>selected works ↓</span>
+        <span>Figma · Framer · HTML/CSS</span>
       </div>
     </section>
 
     <section id="work" class="projects wrap">
-      <a href="#" class="card c1">
-        <div class="card-meta mono"><span>2026</span><span>Mobile App</span></div>
+      <a href="td-emails.html" class="card c-td">
+        <div class="card-meta mono"><span>2023</span><span>Design System</span></div>
         <div class="card-head">
-          <h3>tidepool</h3>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          <h3>TD Emails</h3>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
         </div>
-        <div class="visual"><div class="phone">tidepool</div></div>
+        <p class="summary">A multi-brand email design system for TD Bank's servicing, transactional, and notification emails, unifying TD CA, TD US, MBNA, and Wealth. Lead designer · UX, UI, and design research.</p>
+        <div class="visual">
+          <img src="images/td-emails.jpg" width="1536" height="2048" alt="TD Bank email designs shown on a phone" decoding="async">
+        </div>
       </a>
 
-      <a href="#" class="card c2">
-        <div class="card-meta mono"><span>2026</span><span>Brand Identity</span></div>
+      <!-- Placeholder: replace title, meta, summary, link and image -->
+      <a href="#" class="card c-p2">
+        <div class="card-meta mono"><span>Year</span><span>Category</span></div>
         <div class="card-head">
-          <h3>lumen</h3>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          <h3>Project two</h3>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
         </div>
-        <div class="visual"><div class="phone">lumen</div></div>
+        <p class="summary">Placeholder. Add a one or two sentence summary of the project, your role, and the work done.</p>
+        <div class="visual placeholder"><span class="mono">project image</span></div>
       </a>
 
-      <a href="#" class="card c3">
-        <div class="card-meta mono"><span>2025</span><span>Dashboard UX</span></div>
+      <!-- Placeholder: replace title, meta, summary, link and image -->
+      <a href="#" class="card c-p3">
+        <div class="card-meta mono"><span>Year</span><span>Category</span></div>
         <div class="card-head">
-          <h3>fieldnote</h3>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          <h3>Project three</h3>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
         </div>
-        <div class="visual"><div class="laptop"><i></i><i></i></div></div>
-      </a>
-
-      <a href="#" class="card c4">
-        <div class="card-meta mono"><span>2025</span><span>Packaging</span></div>
-        <div class="card-head">
-          <h3>crumb</h3>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-        </div>
-        <div class="visual"><div class="pouch">crumb</div></div>
-      </a>
-
-      <a href="#" class="card c5">
-        <div class="card-meta mono"><span>2024</span><span>Editorial</span></div>
-        <div class="card-head">
-          <h3>offline</h3>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
-        </div>
-        <div class="visual"><div class="poster"><b></b><b></b><b></b></div></div>
+        <p class="summary">Placeholder. Add a one or two sentence summary of the project, your role, and the work done.</p>
+        <div class="visual placeholder"><span class="mono">project image</span></div>
       </a>
     </section>
 
     <section id="about" class="about wrap">
       <p class="label reveal"><b>.</b>about</p>
-      <p class="reveal">I design products that feel quiet and obvious. <em>Clear structure, careful details, and just enough delight to make people smile on the way to getting things done.</em></p>
-      <a href="#" class="btn reveal">more about me →</a>
-    </section>
-
-    <section id="notes" class="notes wrap">
-      <p class="label reveal"><b>.</b>recent notes</p>
-      <ul>
-        <li class="reveal"><a href="#"><h4>Designing empty states people actually read</h4><time class="mono">Oct 12, 2026</time></a></li>
-        <li class="reveal"><a href="#"><h4>Why I prototype in the browser first</h4><time class="mono">Sep 03, 2026</time></a></li>
-        <li class="reveal"><a href="#"><h4>A small checklist for accessible color</h4><time class="mono">Jul 21, 2026</time></a></li>
-      </ul>
-      <a href="#" class="btn reveal">all notes →</a>
+      <p class="reveal">I bring a systems-driven, craft-focused approach to digital design, <em>shaped by a background in industrial and footwear design and freelance work with startups and small teams.</em></p>
+      <p class="reveal"><em>My practice spans</em> brand and visual design, design systems, interaction design, accessibility, and user research.</p>
+      <a href="https://www.linkedin.com/in/tgibsongamache/" target="_blank" rel="noopener" class="btn reveal">view experience on LinkedIn →</a>
     </section>
 
     <section id="contact" class="contact wrap">
       <p class="label reveal"><b>.</b>contact</p>
-      <h2 class="reveal">have a project in mind? <a href="mailto:hello@example.com">let's talk</a></h2>
+      <h2 class="reveal">let's chat! <a href="https://www.linkedin.com/in/tgibsongamache/" target="_blank" rel="noopener">say hello</a></h2>
+      <div class="socials reveal">
+        <a href="https://www.linkedin.com/in/tgibsongamache/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
+        <a href="https://www.instagram.com/gigi.psd" target="_blank" rel="noopener" class="btn">Instagram ↗</a>
+      </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap foot mono">
-      <span>© 2026 Alex Morgan</span>
+      <span>© 2026 Thomas Gibson-Gamache</span>
       <ul>
-        <li><a href="#">dribbble</a></li>
-        <li><a href="#">linkedin</a></li>
-        <li><a href="#">read.cv</a></li>
+        <li><a href="https://www.linkedin.com/in/tgibsongamache/" target="_blank" rel="noopener">linkedin</a></li>
+        <li><a href="https://www.instagram.com/gigi.psd" target="_blank" rel="noopener">instagram</a></li>
+        <li><a href="https://www.youtube.com/watch?v=ub82Xb1C8os" target="_blank" rel="noopener">i'm feeling lucky</a></li>
       </ul>
     </div>
   </footer>
